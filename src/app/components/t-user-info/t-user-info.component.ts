@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-   selector: 'app-t-channels',
+   selector: 'app-t-user-info',
    standalone: true,
    imports: [],
-   templateUrl: './t-channels.component.html',
-   styleUrl: './t-channels.component.css',
+   templateUrl: './t-user-info.component.html',
+   styleUrl: './t-user-info.component.css',
    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TChannelsComponent {}
+export class TUserInfoComponent {}
