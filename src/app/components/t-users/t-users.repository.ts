@@ -10,38 +10,36 @@ import { Observable } from 'rxjs';
 
 // Сидим первоначальные значения, в настоящем проекте эти данные получали бы с бэка
 const { state, config } = createState(
-   withEntities<Channel>({
+   withEntities<User>({
       initialValue: [
-         { id: 1, name: 'channel1' },
-         { id: 2, name: 'channel2' },
-         { id: 3, name: 'channel3' },
-         { id: 4, name: 'channel4' },
-         { id: 5, name: 'channel5' },
+         { id: 1, username: 'user1', password: '1111', is_online: true },
+         { id: 1, username: 'user2', password: '1111', is_online: true },
+         { id: 1, username: 'user3', password: '1111', is_online: true },
+         { id: 1, username: 'user4', password: '1111', is_online: true },
       ],
    }),
 );
 
 @Injectable()
-export class ChannelRepository {
+export class UserRepository {
    constructor(public readonly store: Store<StoreDef<typeof state>>) {}
 
-   /** Все каналы */
-   readonly channels$: Observable<Channel[]> =
-      this.store.pipe(selectAllEntities());
+   /** Все пользователи */
+   readonly users$: Observable<User[]> = this.store.pipe(selectAllEntities());
 
    // Метод, который вызывался бы из файла сервиса, чтобы заполнить стор значениями с бэка
    // Не используется в рамках тестового задания, данные засижены "искуственно"
-   setChannels(channels: Channel[]): void {
-      this.store.update(setEntities(channels));
+   setUsers(users: User[]): void {
+      this.store.update(setEntities(users));
    }
 }
 
-export const ChannelProvider = {
-   provide: ChannelRepository,
-   useFactory(): ChannelRepository {
-      return new ChannelRepository(
+export const UserProvider = {
+   provide: UserRepository,
+   useFactory(): UserRepository {
+      return new UserRepository(
          new Store({
-            name: `channel-repository-${v4()}`,
+            name: `user-repository-${v4()}`,
             state,
             config,
          }),
@@ -49,7 +47,9 @@ export const ChannelProvider = {
    },
 };
 
-export interface Channel {
+export interface User {
    id: number;
-   name: string;
+   username: string;
+   password: string;
+   is_online: boolean;
 }

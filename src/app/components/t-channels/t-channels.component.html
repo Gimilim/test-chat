@@ -1,1 +1,14 @@
-<p>t-channels works!</p>
+<div class="font-semibold"> CHANNELS </div>
+<ul nz-menu nzMode="vertical" nzTheme="dark">
+   @for (channel of allChannels$ | ngrxPush; track channel.id) {
+         <li nz-menu-item (click)="switchActiveChannel(channel)">
+            <div class="ml-2">
+               <span>{{ channel.name }}</span>
+            </div>
+         </li>
+   }
+</ul>
+
+<div>
+   <button nz-button> + Add channel </button>
+</div>
