@@ -7,10 +7,11 @@ import {
 import { v4 } from 'uuid';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { GetAllUsersQueryResult } from '../../services/codegen/model/GetAllUsersQueryResult';
 
 // Сидим первоначальные значения, в настоящем проекте эти данные получали бы с бэка
 const { state, config } = createState(
-   withEntities<User>({
+   withEntities<GetAllUsersQueryResult>({
       initialValue: [
          { id: 1, username: 'user1', password: '1111', is_online: true },
          { id: 1, username: 'user2', password: '1111', is_online: true },
@@ -25,11 +26,11 @@ export class UserRepository {
    constructor(public readonly store: Store<StoreDef<typeof state>>) {}
 
    /** Все пользователи */
-   readonly users$: Observable<User[]> = this.store.pipe(selectAllEntities());
+   readonly users$: Observable<GetAllUsersQueryResult[]> =
+      this.store.pipe(selectAllEntities());
 
-   // Метод, который вызывался бы из файла сервиса, чтобы заполнить стор значениями с бэка
-   // Не используется в рамках тестового задания, данные засижены "искуственно"
-   setUsers(users: User[]): void {
+   // Заполнить пользователей
+   setUsers(users: GetAllUsersQueryResult[]): void {
       this.store.update(setEntities(users));
    }
 }
@@ -46,10 +47,3 @@ export const UserProvider = {
       );
    },
 };
-
-export interface User {
-   id: number;
-   username: string;
-   password: string;
-   is_online: boolean;
-}

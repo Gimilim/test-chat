@@ -5,7 +5,8 @@
       "ng": "ng",
       "start": "ng serve",
       "build": "ng build",
-      "lint": "ng lint"
+      "lint": "ng lint",
+      "start-fake-back": "json-server db.json"
    },
    "dependencies": {
       "@angular/animations": "^18.0.4",
@@ -21,9 +22,11 @@
       "@ngneat/elf-entities": "^5.0.2",
       "@ngneat/elf-persist-state": "^1.2.1",
       "@ngneat/elf-requests": "^1.9.2",
+      "@ngneat/until-destroy": "^10.0.0",
       "@ngrx/component": "^18.0.0",
       "@tailwindcss/cli": "^4.0.3",
       "eslint": "^9.19.0",
+      "json-server": "^1.0.0-beta.3",
       "ng-zorro-antd": "^18.2.1",
       "rxjs": "^7.8.1",
       "tslib": "^2.6.3",
