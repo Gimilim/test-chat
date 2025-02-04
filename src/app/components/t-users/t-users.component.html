@@ -1,1 +1,5 @@
-<p>t-users works!</p>
+<div class="font-semibold"> USERS </div>
+
+@for (user of allUsers$ | ngrxPush; track user.id) {
+   <div> {{ user.username }} </div>
+}

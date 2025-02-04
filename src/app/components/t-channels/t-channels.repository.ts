@@ -12,11 +12,11 @@ import { Observable } from 'rxjs';
 const { state, config } = createState(
    withEntities<Channel>({
       initialValue: [
-         { id: 1, title: 'channel1' },
-         { id: 2, title: 'channel2' },
-         { id: 3, title: 'channel3' },
-         { id: 4, title: 'channel4' },
-         { id: 5, title: 'channel5' },
+         { id: 1, name: 'channel1' },
+         { id: 2, name: 'channel2' },
+         { id: 3, name: 'channel3' },
+         { id: 4, name: 'channel4' },
+         { id: 5, name: 'channel5' },
       ],
    }),
 );
@@ -31,8 +31,8 @@ export class ChannelRepository {
 
    // Метод, который вызывался бы из файла сервиса, чтобы заполнить стор значениями с бэка
    // Не используется в рамках тестового задания, данные засижены "искуственно"
-   setChannels(articles: Channel[]): void {
-      this.store.update(setEntities(articles));
+   setChannels(channels: Channel[]): void {
+      this.store.update(setEntities(channels));
    }
 }
 
@@ -51,5 +51,5 @@ export const ChannelProvider = {
 
 export interface Channel {
    id: number;
-   title: string;
+   name: string;
 }

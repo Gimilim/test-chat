@@ -1,4 +1,15 @@
-<app-t-channels></app-t-channels>
-<app-t-users></app-t-users>
-<app-t-chat></app-t-chat>
-<app-t-user-info></app-t-user-info>
+<div nz-row>
+<!--Блок "информация о пользователе", "Каналы", "Пользователи">-->
+   <div nz-col nzSpan="6">
+      <app-t-user-info></app-t-user-info>
+      <nz-divider></nz-divider>
+      <app-t-channels></app-t-channels>
+      <nz-divider></nz-divider>
+      <app-t-users></app-t-users>
+   </div>
+
+<!--Блок Чата-->
+   <div nz-col nzSpan="18">
+      <app-t-chat></app-t-chat>
+   </div>
+</div>
