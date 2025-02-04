@@ -36,5 +36,27 @@
          "password": "1111",
          "is_online": false
       }
+   ],
+   "channels": [
+      {
+         "id": 1,
+         "name": "channel1"
+      },
+      {
+         "id": 2,
+         "name": "channel2"
+      },
+      {
+         "id": 3,
+         "name": "channel3"
+      },
+      {
+         "id": 4,
+         "name": "channel4"
+      },
+      {
+         "id": 5,
+         "name": "channel5"
+      }
    ]
 }

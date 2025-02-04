@@ -1,9 +1,9 @@
 // Данный файл сервиса был создан вручную для демонстрации
 
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User } from '../model/GetAllUsersQueryResult';
+import { Channel } from '../model/GetAllChannelsQueryResult';
 
 /**
  * test-chat API
@@ -19,18 +19,18 @@ import { User } from '../model/GetAllUsersQueryResult';
 @Injectable({
    providedIn: 'root',
 })
-export class UserService {
+export class ChannelService {
    protected basePath = 'http://localhost:3000';
 
    constructor(protected httpClient: HttpClient) {}
 
    /**
-    * Получение всех пользователей
+    * Получение всех каналов
     */
-   public getUsers(): Observable<User[]> {
-      return this.httpClient.request<User[]>(
+   public getChannels(): Observable<Channel[]> {
+      return this.httpClient.request<Channel[]>(
          'get',
-         `${this.basePath}/users`,
+         `${this.basePath}/channels`,
          {},
       );
    }
