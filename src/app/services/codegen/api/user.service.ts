@@ -47,7 +47,7 @@ export class UserService {
 
       return this.httpClient.request<GetAllUsersQueryResult>(
          'get',
-         `${this.basePath}/api/users/get-all-users`,
+         `${this.basePath}/users`,
          {},
       );
    }

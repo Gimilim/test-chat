@@ -16,6 +16,10 @@
  * Возвращает всех пользователей
  */
 export interface GetAllUsersQueryResult {
+   users: Array<User>;
+}
+
+export interface User {
    id: number;
    username: string;
    password: string;

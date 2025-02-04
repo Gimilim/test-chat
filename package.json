@@ -6,7 +6,7 @@
       "start": "ng serve",
       "build": "ng build",
       "lint": "ng lint",
-      "start-fake-back": "json-server db.json"
+      "fake-back": "json-server db.json"
    },
    "dependencies": {
       "@angular/animations": "^18.0.4",

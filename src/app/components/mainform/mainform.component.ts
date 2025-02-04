@@ -28,6 +28,6 @@ export class MainformComponent implements OnInit {
 
    ngOnInit(): void {
       // Подгружаем всех пользователей
-      this.userService.getUsers().pipe(untilDestroyed(this)).subscribe();
+      this.userService.getUsers().pipe().subscribe();
    }
 }
