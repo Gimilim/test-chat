@@ -1606,6 +1606,11 @@
   resolved "https://registry.npmjs.org/@msgpackr-extract/msgpackr-extract-win32-x64/-/msgpackr-extract-win32-x64-3.0.3.tgz"
   integrity sha512-x0fWaQtYp4E6sktbsdAqnehxDgEc/VwM7uLsRCYWaiGu0ykYdZPiS8zCWdnjHwyiumousxfBm4SO31eXqwEZhQ==
 
+"@ngneat/elf-devtools@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.npmjs.org/@ngneat/elf-devtools/-/elf-devtools-1.3.0.tgz"
+  integrity sha512-J9+4Vk/S/nKFGnXGZUDYrIx/K8Jfv4TLpzR3voBSOtSeq+c8Q0hdmo8iW7oaK6y5FWFDk0VJktlEh9cjylYxFg==
+
 "@ngneat/elf-entities@^5.0.2":
   version "5.0.2"
   resolved "https://registry.npmjs.org/@ngneat/elf-entities/-/elf-entities-5.0.2.tgz"

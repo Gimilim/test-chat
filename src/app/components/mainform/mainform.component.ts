@@ -23,11 +23,4 @@ import { untilDestroyed } from '@ngneat/until-destroy';
    templateUrl: './mainform.component.html',
    styleUrl: './mainform.component.css',
 })
-export class MainformComponent implements OnInit {
-   private readonly userService = inject(UserService);
-
-   ngOnInit(): void {
-      // Подгружаем всех пользователей
-      this.userService.getUsers().pipe().subscribe();
-   }
-}
+export class MainformComponent {}

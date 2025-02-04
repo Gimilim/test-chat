@@ -12,19 +12,6 @@ import {
    User,
 } from '../../services/codegen/model/GetAllUsersQueryResult';
 
-// Сидим первоначальные значения, в настоящем проекте эти данные получали бы с бэка
-// const { state, config } = createState(
-//    withEntities<User>({
-//       initialValue: [
-//          { id: 1, username: 'user1', password: '1111', is_online: true },
-//          { id: 1, username: 'user2', password: '1111', is_online: true },
-//          { id: 1, username: 'user3', password: '1111', is_online: true },
-//          { id: 1, username: 'user4', password: '1111', is_online: true },
-//       ],
-//    }),
-// );
-
-// Сидим первоначальные значения, в настоящем проекте эти данные получали бы с бэка
 const { state, config } = createState(withEntities<User>());
 
 @Injectable()
@@ -34,7 +21,7 @@ export class UserRepository {
    /** Все пользователи */
    readonly users$: Observable<User[]> = this.store.pipe(selectAllEntities());
 
-   // Заполнить пользователей
+   /** Заполнить пользователей */
    setUsers(users: User[]): void {
       this.store.update(setEntities(users));
    }

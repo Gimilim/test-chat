@@ -3,7 +3,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { GetAllUsersQueryResult } from '../model/GetAllUsersQueryResult';
+import { User } from '../model/GetAllUsersQueryResult';
 
 /**
  * test-chat API
@@ -20,7 +20,7 @@ import { GetAllUsersQueryResult } from '../model/GetAllUsersQueryResult';
    providedIn: 'root',
 })
 export class UserService {
-   protected basePath = '/';
+   protected basePath = 'http://localhost:3000';
    public defaultHeaders = new HttpHeaders();
    // public configuration = new Configuration();
 
@@ -37,15 +37,9 @@ export class UserService {
 
    /**
     * Получение всех пользователей
-    *
-    * @param body
-    * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-    * @param reportProgress flag to report request and response progress.
     */
-   public getUsers(): Observable<GetAllUsersQueryResult> {
-      // authentication (Bearer) required
-
-      return this.httpClient.request<GetAllUsersQueryResult>(
+   public getUsers(): Observable<User[]> {
+      return this.httpClient.request<User[]>(
          'get',
          `${this.basePath}/users`,
          {},

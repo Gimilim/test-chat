@@ -30,7 +30,5 @@ export class TUsersComponent implements OnInit {
    ngOnInit(): void {
       // Подгружаем всех пользователей
       this.userService.getAllUsers().pipe(untilDestroyed(this)).subscribe();
-
-      this.allUsers$.pipe(tap((x) => console.log(x))).subscribe();
    }
 }
