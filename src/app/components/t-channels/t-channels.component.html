@@ -1,14 +1,27 @@
-<div class="font-semibold ml-2"> CHANNELS </div>
+<div class="font-semibold ml-2">CHANNELS</div>
 <ul nz-menu nzMode="vertical" nzTheme="dark">
    @for (channel of allChannels$ | ngrxPush; track channel.id) {
-         <li nz-menu-item (click)="switchActiveChannel(channel)">
-            <div class="ml-2">
-               <span>{{ channel.name }}</span>
-            </div>
-         </li>
+      <li nz-menu-item (click)="switchActiveChannel(channel)">
+         <div class="ml-2">
+            <span>{{ channel.name }}</span>
+         </div>
+      </li>
    }
 </ul>
 
 <div>
-   <button nz-button> + Add channel </button>
+   <button nz-button (click)="showAddChannelModal()">+ Add channel</button>
 </div>
+
+@if (isAddChannelModalVisible$ | ngrxPush) {
+   <nz-modal
+      nzVisible="true"
+      nzTitle="Select channel name"
+      (nzOnOk)="onChannelModalOk()"
+      (nzOnCancel)="onChannelModalCancel()"
+      nzCancelText="Cansel"
+      nzOkText="Create"
+   >
+      <p *nzModalContent>Modal Content</p>
+   </nz-modal>
+}

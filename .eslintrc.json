@@ -1,0 +1,171 @@
+{
+   "root": true,
+   "ignorePatterns": ["projects/**/*", "**/*.js"],
+   "overrides": [
+      {
+         "files": ["*.ts"],
+         "parserOptions": {
+            "project": ["tsconfig.json" /*, "cypress/tsconfig.json"*/],
+            "createDefaultProgram": true
+         },
+         "extends": [
+            "plugin:@angular-eslint/recommended",
+            "plugin:@angular-eslint/template/process-inline-templates",
+            "eslint:recommended",
+            "plugin:@typescript-eslint/recommended",
+            "plugin:@typescript-eslint/recommended-requiring-type-checking",
+            "plugin:prettier/recommended",
+            "plugin:jasmine/recommended",
+            "plugin:sonarjs/recommended"
+            //"plugin:cypress/recommended"
+         ],
+         "plugins": [
+            "jasmine",
+            "rxjs",
+            "rxjs-angular",
+            "unused-imports",
+            "sonarjs",
+            "@ngneat/reactive-forms",
+            "change-detection-strategy"
+            //"cypress"
+         ],
+         "env": {
+            "jasmine": true
+         },
+         "rules": {
+            "@angular-eslint/component-selector": [
+               "error",
+               {
+                  "type": "element",
+                  "prefix": "app",
+                  "style": "kebab-case"
+               }
+            ],
+            "@angular-eslint/directive-selector": [
+               "error",
+               {
+                  "type": "attribute",
+                  "prefix": "app",
+                  "style": "camelCase"
+               }
+            ],
+            "@typescript-eslint/unbound-method": [
+               "error",
+               {
+                  "ignoreStatic": true
+               }
+            ],
+            "rxjs-angular/prefer-takeuntil": [
+               "error",
+               {
+                  "alias": ["untilDestroyed"]
+               }
+            ],
+            "rxjs/no-unsafe-takeuntil": [
+               "error",
+               {
+                  "alias": ["untilDestroyed"]
+               }
+            ],
+            "@typescript-eslint/no-floating-promises": "off",
+            "@typescript-eslint/no-unused-vars": "off",
+            "@typescript-eslint/prefer-readonly": "error",
+            "camelcase": "off",
+            "@typescript-eslint/naming-convention": [
+               "warn",
+               {
+                  "selector": "default",
+                  "format": ["camelCase"],
+                  "filter": {
+                     "regex": "^(UIEntities)$",
+                     "match": false
+                  }
+               },
+               {
+                  "selector": "variable",
+                  "format": ["camelCase", "UPPER_CASE"]
+               },
+               {
+                  "selector": "variable",
+                  "modifiers": ["const"],
+                  "format": ["camelCase", "PascalCase"]
+               },
+               {
+                  "selector": "classProperty",
+                  "modifiers": ["readonly"],
+                  "format": ["camelCase", "UPPER_CASE"]
+               },
+               {
+                  "selector": "parameter",
+                  "format": ["camelCase"],
+                  "leadingUnderscore": "allow"
+               },
+               {
+                  "selector": "memberLike",
+                  "modifiers": ["private"],
+                  "format": ["camelCase"],
+                  "leadingUnderscore": "allow"
+               },
+               {
+                  "selector": "typeLike",
+                  "format": ["PascalCase"]
+               },
+               {
+                  "selector": "objectLiteralProperty",
+                  "format": ["camelCase", "UPPER_CASE"],
+                  "filter": {
+                     "regex": "^(UIEntities)$",
+                     "match": false
+                  }
+               }
+            ],
+            "unused-imports/no-unused-imports": "error",
+            "unused-imports/no-unused-vars": [
+               "warn",
+               {
+                  "vars": "all",
+                  "varsIgnorePattern": "^_",
+                  "args": "after-used",
+                  "argsIgnorePattern": "^_"
+               }
+            ],
+            "curly": "error",
+            "max-len": [
+               "error",
+               {
+                  "code": 180,
+                  "tabWidth": 3
+               }
+            ],
+            "eqeqeq": ["error", "always", { "null": "ignore" }],
+            "no-console": "error",
+            "no-alert": "error",
+            "no-param-reassign": "error",
+            "sonarjs/cognitive-complexity": ["error", 20],
+            "sonarjs/no-duplicate-string": "off",
+            "@ngneat/reactive-forms/no-angular-forms-imports": "error",
+            "change-detection-strategy/on-push": "error"
+         }
+      },
+      {
+         "files": ["*.html"],
+         "extends": [
+            "plugin:@angular-eslint/template/recommended",
+            "plugin:prettier/recommended"
+         ],
+         "rules": {
+            "@angular-eslint/template/eqeqeq": [
+               "error",
+               {
+                  "allowNullOrUndefined": true
+               }
+            ],
+            "@angular-eslint/template/prefer-control-flow": "warn"
+         }
+      },
+      {
+         "files": ["*.json", "*.json5"],
+         "parser": "jsonc-eslint-parser"
+      }
+   ]
+}
