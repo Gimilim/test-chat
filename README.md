@@ -1,59 +1,39 @@
-# TestChat
+Данный проект реализует приложение для обмена сообщениями - чат
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.5.
+Структура проекта:
 
-## Development server
+/components - все компоненты проекта
 
-To start a local development server, run:
+/services - содержит модели и сервисы для запросов на бэк.
+Предполагается, что все файлы были автогенерируемыми через SwaggerCodegen,
+частично упрощено (с комментариями) из-за принципа работы фэйкового бэка.
+Так же в реальном проекте некоторые модели были бы заменены на DTO модели
 
-```bash
-ng serve
-```
+/state - сервисы проекта
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+app.routing.ts - маршруты
 
-## Code scaffolding
+Полезное:
+npm run fake-back -- запускает фейковый бэк
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Подключен функционал для просмотра стора, по идее можно поставить Redux-Devtools как экстеншин для браузера и посмотреть
+работу стора в реальном времени
 
-```bash
-ng generate component component-name
-```
+Основные технологии:
+-Angular 18 версии
+-RxJS
+-AntDesign
+-ElfStore (Стейт менеджмент)
+-Tailwind (Стили)
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Условности:
+1) Предполагается, что бэк реализован на SQRS паттерне, модели были частично упрощены из-за невозможности эмуляции поведения через фейковый бэк
+2) Обновление данных на странице (например после создания нового канала) не работают, предполагается,
+что бэк при успешном создании отправляет объект с данными только что созданного канала
+3) Создание нового канала не генерирует новый айдишник. Айдшиник бы так же был бы присвоен на бэке в автоматическом режиме.
+4) Модальное окно можно было бы написать более лаконично через кастомную обертку (с написанием отдельного сервиса и компонента)
+т.к. в реальных приложениях часто подразумевается многократное использование схожего функционала модальных окон,
+в рамках текущего задания взято готовое, коробочное решение
+5) Если не забуду и хватит время -- добавлю отслеживание запросов на все взаимодействие с бэком
+6) GuidId у моделей объектов заменены на Id осознанно, дискуссионный момент, есть свои плюсы и минусы

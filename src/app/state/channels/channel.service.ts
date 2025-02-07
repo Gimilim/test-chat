@@ -1,8 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
-import { Channel } from '../../services/codegen/model/GetAllChannelsQueryResult';
 import { ChannelRepository } from '../../components/t-channels/t-channels.repository';
 import { ChannelService as ChannelSwaggerService } from '../../services/codegen/api/channel.service';
+import { Channel } from '../../services/codegen/model/GetAllChannelsQueryResult';
 
 @Injectable()
 export class ChannelService {

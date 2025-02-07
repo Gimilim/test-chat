@@ -12,10 +12,14 @@
  * Do not edit the class manually.
  */
 
+// В случае с SQRS паттерном была бы обертка над каналом, упрощено из-за фейкового бэка
+// export interface GetAllChannelQueryDefinition {
+//    channel: Channel;
+// }
+
 /**
  * Возвращает все каналы
  */
-
 export interface Channel {
    id: number;
    name: string;

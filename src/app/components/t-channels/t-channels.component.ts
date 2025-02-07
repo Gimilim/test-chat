@@ -17,7 +17,17 @@ import {
    NzModalContentDirective,
    NzModalService,
 } from 'ng-zorro-antd/modal';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, tap } from 'rxjs';
+import { ReactiveFormsModule, Validators } from '@angular/forms';
+import { ControlsOf, FormControl, FormGroup } from '@ngneat/reactive-forms';
+import {
+   NzFormControlComponent,
+   NzFormDirective,
+   NzFormItemComponent,
+   NzFormLabelComponent,
+} from 'ng-zorro-antd/form';
+import { NzInputDirective } from 'ng-zorro-antd/input';
+import { ChannelService as ChannelSwaggerService } from '../../services/codegen/api/channel.service';
 
 @UntilDestroy()
 @Component({
@@ -30,6 +40,12 @@ import { BehaviorSubject } from 'rxjs';
       NzButtonComponent,
       NzModalComponent,
       NzModalContentDirective,
+      NzFormDirective,
+      NzFormItemComponent,
+      NzFormLabelComponent,
+      ReactiveFormsModule,
+      NzInputDirective,
+      NzFormControlComponent,
    ],
    templateUrl: './t-channels.component.html',
    styleUrl: './t-channels.component.css',
@@ -39,9 +55,12 @@ import { BehaviorSubject } from 'rxjs';
 export class TChannelsComponent implements OnInit {
    private readonly channelRepo = inject(ChannelRepository);
    private readonly channelService = inject(ChannelService);
+   private readonly channelSwaggerService = inject(ChannelSwaggerService);
 
    isAddChannelModalVisible$ = new BehaviorSubject<boolean>(false);
    isOkLoading = false;
+
+   form: FormGroup<ControlsOf<NewChannelControls>>;
 
    // Все каналы
    readonly allChannels$ = this.channelRepo.channels$;
@@ -54,19 +73,49 @@ export class TChannelsComponent implements OnInit {
          .subscribe();
    }
 
+   // Форма для создания нового канала
+   initForm(): void {
+      this.form = new FormGroup<ControlsOf<NewChannelControls>>({
+         id: new FormControl(),
+         name: new FormControl(undefined as string, [Validators.required]),
+      });
+   }
+
+   // Добавление нового канала
+   // Полноценно не работает на фэйковом бэке, при передаче null в id поле была бы автогенерация нового айдишника
+   addChannel(channelInfo: Channel): void {
+      this.channelSwaggerService
+         .addNewChannel(channelInfo)
+         .pipe(
+            tap((response) =>
+               this.channelRepo.updateChannelsList(response.channel),
+            ),
+            untilDestroyed(this),
+         )
+         .subscribe();
+   }
+
+   // Подгрузка выбранного канала
    switchActiveChannel(channel: Channel) {
       console.log(channel.name);
    }
 
-   showAddChannelModal() {
+   // Методы модалки
+   showAddChannelModal(): void {
       this.isAddChannelModalVisible$.next(true);
+
+      this.initForm();
    }
 
-   onChannelModalOk() {
+   onChannelModalOk(): void {
+      this.addChannel(this.form.getRawValue());
+
       this.isAddChannelModalVisible$.next(false);
    }
 
-   onChannelModalCancel() {
+   onChannelModalCancel(): void {
       this.isAddChannelModalVisible$.next(false);
    }
 }
+
+export interface NewChannelControls extends Channel {}

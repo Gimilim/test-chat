@@ -18,10 +18,21 @@
       nzVisible="true"
       nzTitle="Select channel name"
       (nzOnOk)="onChannelModalOk()"
+      [nzOkDisabled]="!this.form.valid"
       (nzOnCancel)="onChannelModalCancel()"
       nzCancelText="Cansel"
       nzOkText="Create"
    >
-      <p *nzModalContent>Modal Content</p>
+      <div *nzModalContent>
+         <form nz-form [formGroup]="form">
+            <nz-form-item>
+               <nz-form-label nzFor="name">Channel name</nz-form-label>
+            </nz-form-item>
+
+            <nz-form-control>
+               <input nz-input formControlName="name" id="name"
+            /></nz-form-control>
+         </form>
+      </div>
    </nz-modal>
 }

@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Channel } from '../model/GetAllChannelsQueryResult';
+import { CreateChannelCommandResult } from '../model/CreateChannelCommandResult';
 
 /**
  * test-chat API
@@ -32,6 +33,21 @@ export class ChannelService {
          'get',
          `${this.basePath}/channels`,
          {},
+      );
+   }
+
+   /**
+    * Добавление канала
+    */
+   public addNewChannel(
+      body?: Channel,
+   ): Observable<CreateChannelCommandResult> {
+      return this.httpClient.request<CreateChannelCommandResult>(
+         'post',
+         `${this.basePath}/channels`,
+         {
+            body: body,
+         },
       );
    }
 }

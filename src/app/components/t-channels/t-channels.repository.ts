@@ -2,6 +2,7 @@ import { createState, Store, StoreDef } from '@ngneat/elf';
 import {
    selectAllEntities,
    setEntities,
+   upsertEntities,
    withEntities,
 } from '@ngneat/elf-entities';
 import { v4 } from 'uuid';
@@ -23,6 +24,10 @@ export class ChannelRepository {
    /** Заполнить каналы */
    setChannels(channels: Channel[]): void {
       this.store.update(setEntities(channels));
+   }
+
+   updateChannelsList(channel: Channel) {
+      this.store.update(upsertEntities(channel));
    }
 }
 

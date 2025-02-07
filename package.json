@@ -23,6 +23,7 @@
       "@ngneat/elf-persist-state": "^1.2.1",
       "@ngneat/elf-requests": "^1.9.2",
       "@ngneat/until-destroy": "^10.0.0",
+      "@ngneat/reactive-forms": "^5.0.2",
       "@ngrx/component": "^18.0.0",
       "@tailwindcss/cli": "^4.0.3",
       "json-server": "^1.0.0-beta.3",

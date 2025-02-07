@@ -1,10 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { UserService as UserSwaggerService } from '../../services/codegen/api/user.service';
 import { Observable, tap } from 'rxjs';
-import {
-   GetAllUsersQueryResult,
-   User,
-} from '../../services/codegen/model/GetAllUsersQueryResult';
+import { User } from '../../services/codegen/model/GetAllUsersQueryResult';
 import { UserRepository } from '../../components/t-users/t-users.repository';
 
 @Injectable()
