@@ -8,7 +8,7 @@ import {
 import { v4 } from 'uuid';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { User } from '../../services/codegen/model/GetAllUsersQueryResult';
+import { User } from '../../../services/codegen/model/GetAllUsersQueryResult';
 
 export interface UsersProps {
    currentUserId: User['id'];

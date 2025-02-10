@@ -9,9 +9,9 @@ import { PushPipe } from '@ngrx/component';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
 import { NzButtonComponent } from 'ng-zorro-antd/button';
-import { ChannelService } from '../../state/channels/channel.service';
+import { ChannelService } from '../../../state/channels/channel.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Channel } from '../../services/codegen/model/GetAllChannelsQueryResult';
+import { Channel } from '../../../services/codegen/model/GetAllChannelsQueryResult';
 import {
    NzModalComponent,
    NzModalContentDirective,
@@ -27,7 +27,7 @@ import {
    NzFormLabelComponent,
 } from 'ng-zorro-antd/form';
 import { NzInputDirective } from 'ng-zorro-antd/input';
-import { ChannelService as ChannelSwaggerService } from '../../services/codegen/api/channel.service';
+import { ChannelService as ChannelSwaggerService } from '../../../services/codegen/api/channel.service';
 
 @UntilDestroy()
 @Component({

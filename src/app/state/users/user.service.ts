@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { UserService as UserSwaggerService } from '../../services/codegen/api/user.service';
 import { Observable, tap } from 'rxjs';
 import { User } from '../../services/codegen/model/GetAllUsersQueryResult';
-import { UserRepository } from '../../components/t-users/t-users.repository';
+import { UserRepository } from '../../components/mainform/t-users/t-users.repository';
 
 @Injectable()
 export class UserService {

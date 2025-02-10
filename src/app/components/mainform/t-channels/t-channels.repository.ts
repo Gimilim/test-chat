@@ -17,8 +17,8 @@ import {
 import { v4 } from 'uuid';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { Channel } from '../../services/codegen/model/GetAllChannelsQueryResult';
-import { MessageData } from '../../services/codegen/model/GetChannelMessagesQueryResult';
+import { Channel } from '../../../services/codegen/model/GetAllChannelsQueryResult';
+import { MessageData } from '../../../services/codegen/model/GetChannelMessagesQueryResult';
 
 export interface ChannelProps {
    /** Активный канал */

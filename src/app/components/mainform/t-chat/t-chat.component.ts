@@ -11,11 +11,11 @@ import { UntilDestroy } from '@ngneat/until-destroy';
 import { NzCardComponent } from 'ng-zorro-antd/card';
 import { NzTypographyComponent } from 'ng-zorro-antd/typography';
 import { switchMap, tap } from 'rxjs';
-import { HashtagPipe } from '../../pipes/hashtag.pipe';
+import { HashtagPipe } from '../../../pipes/hashtag.pipe';
 import { UserRepository } from '../t-users/t-users.repository';
 import { ControlsOf, FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { NewChannelControls } from '../t-channels/t-channels.component';
-import { MessageData } from '../../services/codegen/model/GetChannelMessagesQueryResult';
+import { MessageData } from '../../../services/codegen/model/GetChannelMessagesQueryResult';
 import { Validators } from '@angular/forms';
 
 @UntilDestroy()

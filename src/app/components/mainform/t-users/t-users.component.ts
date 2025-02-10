@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { UserRepository } from './t-users.repository';
 import { PushPipe } from '@ngrx/component';
-import { UserService } from '../../state/users/user.service';
+import { UserService } from '../../../state/users/user.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 @UntilDestroy()
