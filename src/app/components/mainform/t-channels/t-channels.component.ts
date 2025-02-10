@@ -28,6 +28,7 @@ import {
 } from 'ng-zorro-antd/form';
 import { NzInputDirective } from 'ng-zorro-antd/input';
 import { ChannelService as ChannelSwaggerService } from '../../../services/codegen/api/channel.service';
+import { HashtagPipe } from '../../../pipes/hashtag.pipe';
 
 @UntilDestroy()
 @Component({
@@ -46,6 +47,7 @@ import { ChannelService as ChannelSwaggerService } from '../../../services/codeg
       ReactiveFormsModule,
       NzInputDirective,
       NzFormControlComponent,
+      HashtagPipe,
    ],
    templateUrl: './t-channels.component.html',
    styleUrl: './t-channels.component.css',

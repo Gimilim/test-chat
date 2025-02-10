@@ -3,7 +3,7 @@
    @for (channel of allChannels$ | ngrxPush; track channel.id) {
       <li nz-menu-item (click)="switchActiveChannel(channel)">
          <div class="ml-2">
-            <span>{{ channel.name }}</span>
+            <span>{{ channel.name | hashtag }}</span>
          </div>
       </li>
    }

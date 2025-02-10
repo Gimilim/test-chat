@@ -4,6 +4,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../model/GetAllUsersQueryResult';
+import { LoginControl } from '../../../components/login/login.component';
+import { LoginCommandResult } from '../model/LoginCommandResult';
+import { Channel } from '../model/GetAllChannelsQueryResult';
+import { CreateChannelCommandResult } from '../model/CreateChannelCommandResult';
 
 /**
  * test-chat API
@@ -32,6 +36,19 @@ export class UserService {
          'get',
          `${this.basePath}/users`,
          {},
+      );
+   }
+
+   /**
+    * Авторизация
+    */
+   public login(body?: LoginControl): Observable<LoginCommandResult> {
+      return this.httpClient.request<LoginCommandResult>(
+         'post',
+         `${this.basePath}/login`,
+         {
+            body: body,
+         },
       );
    }
 }
