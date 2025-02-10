@@ -1,33 +1,90 @@
-import { createState, Store, StoreDef } from '@ngneat/elf';
 import {
+   createState,
+   select,
+   setProp,
+   Store,
+   StoreDef,
+   withProps,
+} from '@ngneat/elf';
+import {
+   entitiesPropsFactory,
+   getEntity,
    selectAllEntities,
+   selectEntity,
    setEntities,
    upsertEntities,
-   withEntities,
 } from '@ngneat/elf-entities';
 import { v4 } from 'uuid';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Channel } from '../../services/codegen/model/GetAllChannelsQueryResult';
-import { User } from '../../services/codegen/model/GetAllUsersQueryResult';
+import { MessageData } from '../../services/codegen/model/GetChannelMessagesQueryResult';
 
-const { state, config } = createState(withEntities<Channel>());
+export interface ChannelProps {
+   /** Активный канал */
+   activeChannelId?: number;
+}
+
+const { channelEntitiesRef, withChannelEntities } =
+   entitiesPropsFactory('channel');
+const { messageDataEntitiesRef, withMessageDataEntities } =
+   entitiesPropsFactory('messageData');
+
+const { state, config } = createState(
+   withChannelEntities<Channel>(),
+   withMessageDataEntities<MessageData>(),
+   withProps<ChannelProps>({ activeChannelId: null } as ChannelProps),
+);
 
 @Injectable()
 export class ChannelRepository {
    constructor(public readonly store: Store<StoreDef<typeof state>>) {}
 
    /** Все каналы */
-   readonly channels$: Observable<Channel[]> =
-      this.store.pipe(selectAllEntities());
+   readonly channels$: Observable<Channel[]> = this.store.pipe(
+      selectAllEntities({ ref: channelEntitiesRef }),
+   );
 
-   /** Заполнить каналы */
-   setChannels(channels: Channel[]): void {
-      this.store.update(setEntities(channels));
+   /** Все данные сообщений */
+   readonly messageData$: Observable<MessageData[]> = this.store.pipe(
+      selectAllEntities({ ref: messageDataEntitiesRef }),
+   );
+
+   /** ИД активного канала */
+   readonly activeChannelId$ = this.store.pipe(
+      select((st) => st.activeChannelId),
+   );
+
+   /** Канал по ИД */
+   readonly channelById$ = (id: Channel['id']) =>
+      this.store.pipe(selectEntity(id, { ref: channelEntitiesRef }));
+
+   /** Название канала по ИД */
+   readonly channelNameById$ = (id: Channel['id']) =>
+      this.channelById$(id).pipe(map((x) => x?.name));
+
+   /** Записать ИД активного канала */
+   setActiveChannel(id: Channel['id']): void {
+      this.store.update(setProp('activeChannelId', id));
    }
 
+   /** Заполнить стор каналами */
+   setChannels(channels: Channel[]): void {
+      this.store.update(setEntities(channels, { ref: channelEntitiesRef }));
+   }
+
+   /** Заполнить стор данными сообщений канала */
+   setMessageData(messages: MessageData[]): void {
+      this.store.update(setEntities(messages, { ref: messageDataEntitiesRef }));
+   }
+
+   /** Обновить каналы новыми данными */
    updateChannelsList(channel: Channel) {
-      this.store.update(upsertEntities(channel));
+      this.store.update(upsertEntities(channel, { ref: channelEntitiesRef }));
+   }
+
+   get activeChannelId(): number {
+      return this.store.query((state) => state.activeChannelId);
    }
 }
 

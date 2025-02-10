@@ -50,7 +50,6 @@ import { ChannelService as ChannelSwaggerService } from '../../services/codegen/
    templateUrl: './t-channels.component.html',
    styleUrl: './t-channels.component.css',
    changeDetection: ChangeDetectionStrategy.OnPush,
-   providers: [ChannelProvider, ChannelService, NzModalService],
 })
 export class TChannelsComponent implements OnInit {
    private readonly channelRepo = inject(ChannelRepository);
@@ -58,7 +57,6 @@ export class TChannelsComponent implements OnInit {
    private readonly channelSwaggerService = inject(ChannelSwaggerService);
 
    isAddChannelModalVisible$ = new BehaviorSubject<boolean>(false);
-   isOkLoading = false;
 
    form: FormGroup<ControlsOf<NewChannelControls>>;
 
@@ -76,7 +74,7 @@ export class TChannelsComponent implements OnInit {
    // Форма для создания нового канала
    initForm(): void {
       this.form = new FormGroup<ControlsOf<NewChannelControls>>({
-         id: new FormControl(),
+         id: new FormControl(null as number),
          name: new FormControl(undefined as string, [Validators.required]),
       });
    }
@@ -95,9 +93,17 @@ export class TChannelsComponent implements OnInit {
          .subscribe();
    }
 
-   // Подгрузка выбранного канала
+   // Подгрузка сообщений выбранного канала
    switchActiveChannel(channel: Channel) {
-      console.log(channel.name);
+      this.channelRepo.setActiveChannel(channel.id);
+
+      this.channelSwaggerService
+         .getChannelMessages(channel.id)
+         .pipe(
+            tap((response) => this.channelRepo.setMessageData(response)),
+            untilDestroyed(this),
+         )
+         .subscribe();
    }
 
    // Методы модалки

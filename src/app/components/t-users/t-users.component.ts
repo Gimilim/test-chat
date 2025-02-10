@@ -4,11 +4,10 @@ import {
    inject,
    OnInit,
 } from '@angular/core';
-import { UserProvider, UserRepository } from './t-users.repository';
+import { UserRepository } from './t-users.repository';
 import { PushPipe } from '@ngrx/component';
 import { UserService } from '../../state/users/user.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { tap } from 'rxjs';
 
 @UntilDestroy()
 @Component({
@@ -18,7 +17,6 @@ import { tap } from 'rxjs';
    templateUrl: './t-users.component.html',
    styleUrl: './t-users.component.css',
    changeDetection: ChangeDetectionStrategy.OnPush,
-   providers: [UserProvider, UserService],
 })
 export class TUsersComponent implements OnInit {
    private readonly userRepo = inject(UserRepository);

@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Channel } from '../model/GetAllChannelsQueryResult';
 import { CreateChannelCommandResult } from '../model/CreateChannelCommandResult';
+import { MessageData } from '../model/GetChannelMessagesQueryResult';
 
 /**
  * test-chat API
@@ -48,6 +49,18 @@ export class ChannelService {
          {
             body: body,
          },
+      );
+   }
+
+   /**
+    * Получение сообщений канала по ИД
+    * (в рамках упрощения сделано методом get с передачей параметра в роуте, а не в теле запроса)
+    */
+   public getChannelMessages(channelId: number): Observable<MessageData[]> {
+      return this.httpClient.request<MessageData[]>(
+         'get',
+         `${this.basePath}/messages?channelId=${channelId}`,
+         {},
       );
    }
 }

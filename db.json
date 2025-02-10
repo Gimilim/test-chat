@@ -57,18 +57,32 @@
     {
       "id": "5",
       "name": "channel5"
-    },
-    {
-      "id": null,
-      "name": "dd"
-    },
-    {
-      "id": null,
-      "name": "dd"
-    },
-    {
-      "id": null,
-      "name": "kjhgbbsa"
     }
-  ]
+  ],
+   "messages": [
+      {
+         "channelId": 1,
+         "fromUser": 1,
+         "content": "Channel1 Message1 FromUser1",
+         "id": 1
+      },
+      {
+         "channelId": 1,
+         "fromUser": 2,
+         "content": "Channel1 Message2 FromUser2 with looooooooooooooooooooooooooooong text",
+         "id": 2
+      },
+      {
+         "channelId": 2,
+         "fromUser": 3,
+         "content": "Channel2 Message1  FromUser3",
+         "id": 3
+      },
+      {
+         "channelId": 2,
+         "fromUser": 4,
+         "content": "Channel2 Message2 FromUser4",
+         "id": 4
+      }
+   ]
 }

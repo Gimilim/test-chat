@@ -1,1 +1,27 @@
-<p>t-chat works!</p>
+<nz-card [nzTitle]="activeChannelName$ | ngrxPush | hashtag">
+   @for (messageData of messageData$ | ngrxPush; track messageData.id) {
+      <div class="items-start gap-2.5 mb-2 grid grid-cols-3">
+         <div
+            class="flex flex-col w-full col-span-2 leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700"
+         >
+            <div class="flex items-center space-x-2 rtl:space-x-reverse">
+               <span
+                  class="text-sm font-semibold text-gray-900 dark:text-white"
+               >
+                  {{ userNameById$(messageData.fromUser) | ngrxPush }}
+               </span>
+               <span
+                  class="text-sm font-normal text-gray-500 dark:text-gray-400"
+                  >тут позже будет дата отправки сообщения</span
+               >
+            </div>
+            <p class="text-sm font-normal py-2.5 text-gray-900 dark:text-white">
+               {{ messageData.content }}
+            </p>
+            <span class="text-sm font-normal text-gray-500 dark:text-gray-400"
+               >Тут позже будет статус того, что сообщение отправилось</span
+            >
+         </div>
+      </div>
+   }
+</nz-card>
