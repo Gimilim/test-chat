@@ -54,7 +54,6 @@ import { ChannelService as ChannelSwaggerService } from '../../../services/codeg
 export class TChatComponent implements OnInit {
    private readonly channelRepo = inject(ChannelRepository);
    private readonly userRepo = inject(UserRepository);
-   private readonly channelService = inject(ChannelService);
    private readonly channelSwaggerService = inject(ChannelSwaggerService);
 
    readonly messageData$ = this.channelRepo.messageData$;
