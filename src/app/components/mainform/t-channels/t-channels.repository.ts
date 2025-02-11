@@ -8,11 +8,14 @@ import {
 } from '@ngneat/elf';
 import {
    entitiesPropsFactory,
-   getEntity,
    selectAllEntities,
+   selectEntities,
    selectEntity,
    setEntities,
+   UIEntitiesRef,
+   unionEntities,
    upsertEntities,
+   withUIEntities,
 } from '@ngneat/elf-entities';
 import { v4 } from 'uuid';
 import { Injectable } from '@angular/core';
@@ -33,6 +36,7 @@ const { messageDataEntitiesRef, withMessageDataEntities } =
 const { state, config } = createState(
    withChannelEntities<Channel>(),
    withMessageDataEntities<MessageData>(),
+   withUIEntities<MessageDataUI>(),
    withProps<ChannelProps>({ activeChannelId: null } as ChannelProps),
 );
 
@@ -46,9 +50,22 @@ export class ChannelRepository {
    );
 
    /** Все данные сообщений */
-   readonly messageData$: Observable<MessageData[]> = this.store.pipe(
-      selectAllEntities({ ref: messageDataEntitiesRef }),
-   );
+   // readonly messageData$: Observable<MessageData[]> = this.store.pipe(
+   //    selectAllEntities({ ref: messageDataEntitiesRef }),
+   // );
+
+   readonly messageData$ = this.store
+      .combine({
+         entities: this.store.pipe(
+            selectAllEntities({ ref: messageDataEntitiesRef }),
+         ),
+         UIEntities: this.store.pipe(
+            selectEntities({
+               ref: UIEntitiesRef,
+            }),
+         ),
+      })
+      .pipe(unionEntities());
 
    /** ИД активного канала */
    readonly activeChannelId$ = this.store.pipe(
@@ -75,7 +92,13 @@ export class ChannelRepository {
 
    /** Заполнить стор данными сообщений канала */
    setMessageData(messages: MessageData[]): void {
-      this.store.update(setEntities(messages, { ref: messageDataEntitiesRef }));
+      this.store.update(
+         setEntities(messages, { ref: messageDataEntitiesRef }),
+         setEntities(
+            (messages ?? []).map((x) => ({ id: x.id, deliveryStatus: true })),
+            { ref: UIEntitiesRef },
+         ),
+      );
    }
 
    /** Локально добавляем новое сообщение в чат*/
@@ -108,3 +131,8 @@ export const ChannelProvider = {
       );
    },
 };
+
+export interface MessageDataUI {
+   id: MessageData['id'];
+   deliveryStatus?: boolean;
+}

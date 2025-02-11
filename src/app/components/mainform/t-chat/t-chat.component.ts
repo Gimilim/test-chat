@@ -24,7 +24,7 @@ import {
 import { NzInputDirective } from 'ng-zorro-antd/input';
 import { NzButtonComponent } from 'ng-zorro-antd/button';
 import { NzColDirective, NzRowDirective } from 'ng-zorro-antd/grid';
-import { UserService } from '../../../state/users/user.service';
+import { ChannelService } from '../../../state/channels/channel.service';
 
 @UntilDestroy()
 @Component({
@@ -53,7 +53,7 @@ import { UserService } from '../../../state/users/user.service';
 export class TChatComponent implements OnInit {
    private readonly channelRepo = inject(ChannelRepository);
    private readonly userRepo = inject(UserRepository);
-   private readonly userService = inject(UserService);
+   private readonly channelService = inject(ChannelService);
 
    readonly messageData$ = this.channelRepo.messageData$;
 
@@ -83,12 +83,11 @@ export class TChatComponent implements OnInit {
 
       newMessage.fromUser = this.userRepo.currentUserId;
 
-      // локально добавляем в стор сообщение
-      // todo добавить ui entity чтобы отображать статус отправки сообщения
+      // Локально добавляем в стор сообщение
       this.channelRepo.preAddMessage(newMessage);
 
       // Отправляем сообщение на бэк
-      this.userService.sendMessage();
+      this.channelService.sendMessage();
    }
 }
 
