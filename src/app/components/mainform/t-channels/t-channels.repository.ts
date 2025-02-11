@@ -51,10 +51,6 @@ export class ChannelRepository {
    );
 
    /** Все данные сообщений */
-   // readonly messageData$: Observable<MessageData[]> = this.store.pipe(
-   //    selectAllEntities({ ref: messageDataEntitiesRef }),
-   // );
-
    readonly messageData$ = this.store
       .combine({
          entities: this.store.pipe(
