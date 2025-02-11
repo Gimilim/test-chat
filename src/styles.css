@@ -4,3 +4,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.ant-menu-item-selected {
+   background-color: rgb(79 70 229) !important;
+}
