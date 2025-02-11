@@ -90,6 +90,7 @@ export class TChatComponent implements OnInit {
       this.channelRepo.preAddMessage(newMessage);
 
       // Отправляем сообщение на бэк, меняем статус у сообщения на "доставлено"
+      // (Не работает на фейковом бэке)
       this.channelSwaggerService
          .sendMessage(newMessage)
          .pipe(
