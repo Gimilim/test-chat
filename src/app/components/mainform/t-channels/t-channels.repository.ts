@@ -100,7 +100,6 @@ export class ChannelRepository {
 
    /** Локально добавляем новое сообщение в чат*/
    preAddMessage(newMessage: MessageData) {
-      // todo Добавить тут обновление ui энтити
       this.store.update(
          upsertEntities(newMessage, { ref: messageDataEntitiesRef }),
       );
