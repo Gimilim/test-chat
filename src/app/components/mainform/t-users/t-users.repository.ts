@@ -13,9 +13,11 @@ import { User } from '../../../services/codegen/model/GetAllUsersQueryResult';
 export interface UsersProps {
    currentUserId: User['id'];
 }
+
+// todo тут нужно убрать фейкового первого юзера
 const { state, config } = createState(
    withEntities<User>(),
-   withProps<UsersProps>({ currentUserId: undefined }),
+   withProps<UsersProps>({ currentUserId: 1 }),
 );
 
 @Injectable()
@@ -39,6 +41,11 @@ export class UserRepository {
    /** Имя пользователя по ИД */
    readonly userNameById$ = (id: User['id']) =>
       this.userById$(id).pipe(map((x) => x?.username));
+
+   /** ИД текущего пользователя */
+   get currentUserId(): number {
+      return this.store.query((state) => state.currentUserId);
+   }
 }
 
 export const UserProvider = {

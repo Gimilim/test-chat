@@ -11,6 +11,6 @@ export class HashtagPipe implements PipeTransform {
          return value;
       }
 
-      return `# ${value}`;
+      return `#${value}`;
    }
 }

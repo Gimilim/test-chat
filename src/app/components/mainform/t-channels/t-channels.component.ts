@@ -4,7 +4,7 @@ import {
    inject,
    OnInit,
 } from '@angular/core';
-import { ChannelProvider, ChannelRepository } from './t-channels.repository';
+import { ChannelRepository } from './t-channels.repository';
 import { PushPipe } from '@ngrx/component';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
@@ -12,11 +12,7 @@ import { NzButtonComponent } from 'ng-zorro-antd/button';
 import { ChannelService } from '../../../state/channels/channel.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Channel } from '../../../services/codegen/model/GetAllChannelsQueryResult';
-import {
-   NzModalComponent,
-   NzModalContentDirective,
-   NzModalService,
-} from 'ng-zorro-antd/modal';
+import { NzModalComponent, NzModalContentDirective } from 'ng-zorro-antd/modal';
 import { BehaviorSubject, tap } from 'rxjs';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { ControlsOf, FormControl, FormGroup } from '@ngneat/reactive-forms';

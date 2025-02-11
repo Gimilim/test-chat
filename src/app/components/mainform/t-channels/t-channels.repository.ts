@@ -78,6 +78,14 @@ export class ChannelRepository {
       this.store.update(setEntities(messages, { ref: messageDataEntitiesRef }));
    }
 
+   /** Локально добавляем новое сообщение в чат*/
+   preAddMessage(newMessage: MessageData) {
+      // todo Добавить тут обновление ui энтити
+      this.store.update(
+         upsertEntities(newMessage, { ref: messageDataEntitiesRef }),
+      );
+   }
+
    /** Обновить каналы новыми данными */
    updateChannelsList(channel: Channel) {
       this.store.update(upsertEntities(channel, { ref: channelEntitiesRef }));

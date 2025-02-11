@@ -24,6 +24,7 @@ import {
 import { NzInputDirective } from 'ng-zorro-antd/input';
 import { NzButtonComponent } from 'ng-zorro-antd/button';
 import { NzColDirective, NzRowDirective } from 'ng-zorro-antd/grid';
+import { UserService } from '../../../state/users/user.service';
 
 @UntilDestroy()
 @Component({
@@ -52,6 +53,7 @@ import { NzColDirective, NzRowDirective } from 'ng-zorro-antd/grid';
 export class TChatComponent implements OnInit {
    private readonly channelRepo = inject(ChannelRepository);
    private readonly userRepo = inject(UserRepository);
+   private readonly userService = inject(UserService);
 
    readonly messageData$ = this.channelRepo.messageData$;
 
@@ -76,7 +78,18 @@ export class TChatComponent implements OnInit {
       });
    }
 
-   onSend() {}
+   onSend() {
+      const newMessage = this.form.getRawValue();
+
+      newMessage.fromUser = this.userRepo.currentUserId;
+
+      // локально добавляем в стор сообщение
+      // todo добавить ui entity чтобы отображать статус отправки сообщения
+      this.channelRepo.preAddMessage(newMessage);
+
+      // Отправляем сообщение на бэк
+      this.userService.sendMessage();
+   }
 }
 
 export interface MessageDataControls extends MessageData {}

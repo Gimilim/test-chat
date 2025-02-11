@@ -23,4 +23,6 @@ export class UserService {
 
       this.userSwaggerService.login(loginData);
    }
+
+   sendMessage() {}
 }
