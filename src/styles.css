@@ -6,6 +6,11 @@
 @tailwind utilities;
 
 .ant-menu-item-selected {
-   background-color: rgb(79 70 229) !important;
+   background-color: theme('colors.gray.800') !important;
+   border-radius: 6px !important;
+}
+
+.ant-menu-item:hover {
+   background-color: theme('colors.gray.700') !important;
    border-radius: 6px !important;
 }
