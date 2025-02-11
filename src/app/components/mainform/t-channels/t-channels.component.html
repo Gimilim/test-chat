@@ -1,8 +1,8 @@
-<div class="font-semibold ml-2">CHANNELS</div>
-<ul nz-menu nzMode="vertical" nzTheme="dark">
+<div class="font-semibold mb-2">CHANNELS</div>
+<ul nz-menu nzMode="vertical" nzTheme="dark" class="mb-2">
    @for (channel of allChannels$ | ngrxPush; track channel.id) {
       <li nz-menu-item (click)="switchActiveChannel(channel)">
-         <div class="ml-2">
+         <div>
             <span>{{ channel.name | hashtag }}</span>
          </div>
       </li>
