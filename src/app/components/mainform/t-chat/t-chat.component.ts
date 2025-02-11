@@ -7,10 +7,10 @@ import {
 import { ChannelRepository } from '../t-channels/t-channels.repository';
 import { PushPipe } from '@ngrx/component';
 import { AsyncPipe } from '@angular/common';
-import { UntilDestroy } from '@ngneat/until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { NzCardComponent } from 'ng-zorro-antd/card';
 import { NzTypographyComponent } from 'ng-zorro-antd/typography';
-import { switchMap } from 'rxjs';
+import { switchMap, tap } from 'rxjs';
 import { HashtagPipe } from '../../../pipes/hashtag.pipe';
 import { UserRepository } from '../t-users/t-users.repository';
 import { ControlsOf, FormControl, FormGroup } from '@ngneat/reactive-forms';
@@ -25,6 +25,7 @@ import { NzInputDirective } from 'ng-zorro-antd/input';
 import { NzButtonComponent } from 'ng-zorro-antd/button';
 import { NzColDirective, NzRowDirective } from 'ng-zorro-antd/grid';
 import { ChannelService } from '../../../state/channels/channel.service';
+import { ChannelService as ChannelSwaggerService } from '../../../services/codegen/api/channel.service';
 
 @UntilDestroy()
 @Component({
@@ -54,6 +55,7 @@ export class TChatComponent implements OnInit {
    private readonly channelRepo = inject(ChannelRepository);
    private readonly userRepo = inject(UserRepository);
    private readonly channelService = inject(ChannelService);
+   private readonly channelSwaggerService = inject(ChannelSwaggerService);
 
    readonly messageData$ = this.channelRepo.messageData$;
 
@@ -74,7 +76,7 @@ export class TChatComponent implements OnInit {
          id: new FormControl(null as number),
          fromUser: new FormControl(),
          content: new FormControl(undefined as string, [Validators.required]),
-         channelId: new FormControl(this.channelRepo.activeChannelId),
+         channelId: new FormControl(),
       });
    }
 
@@ -82,12 +84,21 @@ export class TChatComponent implements OnInit {
       const newMessage = this.form.getRawValue();
 
       newMessage.fromUser = this.userRepo.currentUserId;
+      newMessage.channelId = this.channelRepo.activeChannelId;
 
       // Локально добавляем в стор сообщение
       this.channelRepo.preAddMessage(newMessage);
 
-      // Отправляем сообщение на бэк
-      this.channelService.sendMessage();
+      // Отправляем сообщение на бэк, меняем статус у сообщения на "доставлено"
+      this.channelSwaggerService
+         .sendMessage(newMessage)
+         .pipe(
+            tap((response) => {
+               this.channelRepo.updateDeliveryStatus(response.message.id);
+            }),
+            untilDestroyed(this),
+         )
+         .subscribe();
    }
 }
 

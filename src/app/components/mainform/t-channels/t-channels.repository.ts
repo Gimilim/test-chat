@@ -14,6 +14,7 @@ import {
    setEntities,
    UIEntitiesRef,
    unionEntities,
+   updateEntities,
    upsertEntities,
    withUIEntities,
 } from '@ngneat/elf-entities';
@@ -116,6 +117,15 @@ export class ChannelRepository {
 
    get activeChannelId(): number {
       return this.store.query((state) => state.activeChannelId);
+   }
+
+   /** Обновить статус отправки сообщения */
+   updateDeliveryStatus(id: MessageData['id']) {
+      this.store.update(
+         updateEntities(id, (e) => ({ ...e, deliveryStatus: true }), {
+            ref: UIEntitiesRef,
+         }),
+      );
    }
 }
 

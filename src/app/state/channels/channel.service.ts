@@ -14,6 +14,4 @@ export class ChannelService {
          .getChannels()
          .pipe(tap((response) => this.channelRepo.setChannels(response)));
    }
-
-   sendMessage() {}
 }

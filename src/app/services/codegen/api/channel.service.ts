@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Channel } from '../model/GetAllChannelsQueryResult';
 import { CreateChannelCommandResult } from '../model/CreateChannelCommandResult';
 import { MessageData } from '../model/GetChannelMessagesQueryResult';
+import { SendMessageCommandResult } from '../model/SendMessageCommandResult';
 
 /**
  * test-chat API
@@ -61,6 +62,18 @@ export class ChannelService {
          'get',
          `${this.basePath}/messages?channelId=${channelId}`,
          {},
+      );
+   }
+
+   public sendMessage(
+      body?: MessageData,
+   ): Observable<SendMessageCommandResult> {
+      return this.httpClient.request<SendMessageCommandResult>(
+         'post',
+         `${this.basePath}/messages`,
+         {
+            body: body,
+         },
       );
    }
 }
