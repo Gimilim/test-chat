@@ -5,8 +5,6 @@
    </div>
    <nz-divider></nz-divider>
    <div class="flex flex-col h-full">
-
-
       <!--Блок сообщений канала-->
       <div class="grow">
          @for (messageData of messageData$ | ngrxPush; track messageData.id) {
