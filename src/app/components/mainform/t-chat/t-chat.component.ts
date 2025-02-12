@@ -24,8 +24,8 @@ import {
 import { NzInputDirective } from 'ng-zorro-antd/input';
 import { NzButtonComponent } from 'ng-zorro-antd/button';
 import { NzColDirective, NzRowDirective } from 'ng-zorro-antd/grid';
-import { ChannelService } from '../../../state/channels/channel.service';
 import { ChannelService as ChannelSwaggerService } from '../../../services/codegen/api/channel.service';
+import { NzDividerComponent } from 'ng-zorro-antd/divider';
 
 @UntilDestroy()
 @Component({
@@ -46,6 +46,7 @@ import { ChannelService as ChannelSwaggerService } from '../../../services/codeg
       NzButtonComponent,
       NzRowDirective,
       NzColDirective,
+      NzDividerComponent,
    ],
    templateUrl: './t-chat.component.html',
    styleUrl: './t-chat.component.css',

@@ -6,8 +6,6 @@ import { Observable } from 'rxjs';
 import { User } from '../model/GetAllUsersQueryResult';
 import { LoginControl } from '../../../components/login/login.component';
 import { LoginCommandResult } from '../model/LoginCommandResult';
-import { Channel } from '../model/GetAllChannelsQueryResult';
-import { CreateChannelCommandResult } from '../model/CreateChannelCommandResult';
 
 /**
  * test-chat API
@@ -42,13 +40,11 @@ export class UserService {
    /**
     * Авторизация
     */
-   public login(body?: LoginControl): Observable<LoginCommandResult> {
-      return this.httpClient.request<LoginCommandResult>(
-         'post',
-         `${this.basePath}/login`,
-         {
-            body: body,
-         },
+   public login({ username, password }: LoginControl): Observable<User[]> {
+      return this.httpClient.request<User[]>(
+         'get',
+         `${this.basePath}/users?username=${username}&password=${password}`,
+         {},
       );
    }
 }

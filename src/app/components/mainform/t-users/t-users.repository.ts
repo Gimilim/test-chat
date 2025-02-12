@@ -1,4 +1,11 @@
-import { createState, select, Store, StoreDef, withProps } from '@ngneat/elf';
+import {
+   createState,
+   select,
+   setProp,
+   Store,
+   StoreDef,
+   withProps,
+} from '@ngneat/elf';
 import {
    selectAllEntities,
    selectEntity,
@@ -14,10 +21,9 @@ export interface UsersProps {
    currentUserId: User['id'];
 }
 
-// todo тут нужно убрать фейкового первого юзера
 const { state, config } = createState(
    withEntities<User>(),
-   withProps<UsersProps>({ currentUserId: 1 }),
+   withProps<UsersProps>({ currentUserId: null }),
 );
 
 @Injectable()
@@ -29,6 +35,11 @@ export class UserRepository {
 
    /** ИД текущего пользователя */
    readonly currentUserId$ = this.store.pipe(select((st) => st.currentUserId));
+
+   /** Установить текущего пользователя */
+   setCurrentUserId(id: User['id']): void {
+      this.store.update(setProp('currentUserId', id));
+   }
 
    /** Заполнить пользователей */
    setUsers(users: User[]): void {
