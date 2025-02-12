@@ -17,4 +17,12 @@ export class NavigatorService {
 
       this.go(url);
    }
+
+   goLogin(): void {
+      const url = this.router
+         .createUrlTree([GlobalRoutes['ROOT'], RelativePaths['LOGIN']])
+         .toString();
+
+      this.go(url);
+   }
 }

@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { MainformComponent } from './components/mainform/mainform.component';
 import { LoginComponent } from './components/login/login.component';
+import { hasRoutePermission } from './guards/permission.guard';
 
 export const routes: Routes = [
    {
@@ -11,6 +12,7 @@ export const routes: Routes = [
    {
       path: 'main',
       component: MainformComponent,
+      canActivate: [hasRoutePermission],
    },
    {
       path: 'login',

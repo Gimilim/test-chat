@@ -100,6 +100,8 @@ export class TChatComponent implements OnInit {
             untilDestroyed(this),
          )
          .subscribe();
+
+      this.form.reset(null);
    }
 }
 
