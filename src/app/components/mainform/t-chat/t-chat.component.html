@@ -1,10 +1,11 @@
 @if (activeChannelId$ | ngrxPush) {
+   <!--Блок названия канала-->
+   <div class="mt-4 h-8">
+      {{ activeChannelName$ | ngrxPush | hashtag }}
+   </div>
+   <nz-divider></nz-divider>
    <div class="flex flex-col h-full">
-      <!--Блок названия канала-->
-      <div class="mt-4 h-8">
-         {{ activeChannelName$ | ngrxPush | hashtag }}
-      </div>
-      <nz-divider></nz-divider>
+
 
       <!--Блок сообщений канала-->
       <div class="grow">
