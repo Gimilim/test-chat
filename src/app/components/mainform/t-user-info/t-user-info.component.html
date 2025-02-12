@@ -1,1 +1,15 @@
-{{ userNameById$(currentUserId) | ngrxPush }}
+<div nz-row class="mt-4 mr-4 justify-between h-8">
+   <!--Блок имени текущего пользователя-->
+   <div nz-col nzSpan="6">{{ userNameById$(currentUserId) | ngrxPush }}</div>
+
+   <!--Блок кнопки-->
+   <div nz-col nzSpan="6">
+      <button
+         nz-button
+         class="flex justify-center rounded-md bg-indigo-600 px-3 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+         (click)="onLogOut()"
+      >
+         Log Out
+      </button>
+   </div>
+</div>
