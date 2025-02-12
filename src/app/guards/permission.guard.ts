@@ -12,7 +12,5 @@ export const hasRoutePermission: CanActivateFn = () => {
    } else {
       navigator.goLogin();
    }
-
-   console.log('test');
    return false;
 };
